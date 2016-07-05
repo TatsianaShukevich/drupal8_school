@@ -1,0 +1,6 @@
+name: Lesson4 Module
+description: Module for training purposes
+package: Drupal 8 school
+
+type: module
+core: 8.x

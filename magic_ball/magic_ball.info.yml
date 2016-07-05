@@ -1,0 +1,8 @@
+name: Magic ball Module
+description: Module for training purposes
+package: Drupal 8 school
+
+type: module
+core: 8.x
+
+configure: magic_ball.settings_form

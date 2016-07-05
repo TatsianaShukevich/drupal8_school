@@ -1,0 +1,8 @@
+services:
+    magic_ball.answer_service:
+        class: Drupal\magic_ball\AnswerService
+
+    magic_ball.magic_subscriber:
+        class: Drupal\magic_ball\EventSubscriber\MagicSubscriber
+        tags:
+          - { name: event_subscriber }

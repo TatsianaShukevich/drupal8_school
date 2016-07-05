@@ -1,0 +1,6 @@
+lesson4.render_api_example_page:
+  path: '/render-api-example'
+  defaults:
+    _controller: '\Drupal\lesson4\Controller\Lesson4Controller::showRenderApiExamplePage'
+  requirements:
+    _permission: 'view content'
