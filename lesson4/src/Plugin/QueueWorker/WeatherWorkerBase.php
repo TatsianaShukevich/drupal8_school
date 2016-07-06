@@ -69,6 +69,7 @@ abstract class WeatherWorkerBase extends QueueWorkerBase implements ContainerFac
      */
     public function processItem($data) {
         var_dump($data);
+        //die();
         \Drupal::configFactory()
             ->getEditable('lesson4.settings')
             ->set('lesson4.weather', 'test')
