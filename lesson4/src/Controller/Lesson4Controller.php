@@ -24,8 +24,10 @@ class Lesson4Controller extends ControllerBase {
 //        $row[] = array(
 //            'data' => $operations_elements,
 //        );
+        $weather = $this->config('lesson4.settings')->get('lesson4.weather');
+        var_dump($weather);
         $rows[] = array(
-            'data' => array('a','s','d'),
+            'data' => array('a','s',$weather),
 
         );
         $headers = array();
