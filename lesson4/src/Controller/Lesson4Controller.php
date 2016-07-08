@@ -23,11 +23,19 @@ class Lesson4Controller extends ControllerBase {
     protected $weatherService;
 
     /**
+     * The service for answers.
+     *
+     * @var \Drupal\magic_ball\AnswerService
+     */
+    protected $render;
+
+    /**
      * {@inheritdoc}
      */
     public static function create(ContainerInterface $container) {
         return new static(
-            $container->get('lesson4.weather_service')
+            $container->get('lesson4.weather_service'),
+            $container->get('renderer')
         );
     }
 
@@ -36,9 +44,11 @@ class Lesson4Controller extends ControllerBase {
      *
      * @param \Drupal\lesson4\WeatherService $weatherService
      *   The service for weather.
+     * @param \Drupal\Core\Render\Renderer $render
      */
-    public function __construct($weatherService) {   
+    public function __construct($weatherService, $render) {
         $this->weatherService = $weatherService;
+        $this->render = $render;
     }
 
     /**
@@ -48,61 +58,115 @@ class Lesson4Controller extends ControllerBase {
      */
     public function showRenderApiExamplePage() {
 
-        //$weather = $this->config('lesson4.settings')->get('lesson4.weather');
 
-        //die(var_dump($weather));
-        
         drupal_set_message($this->weatherService->getCityName());
 
         $weatherPerDay = $this->weatherService->getWeatherPerDay();
 
-       // var_dump($weather);
         $rows = array();
-//        $output[] = theme('image_style', array(
-//            'style_name' => $style_name,
-//            'path' => $path,
-//            'attributes' => $attributes,
-//        ));
 
-//        $img = array(
-//            '#type' => 'image_style',
-//            'path' => 'http://openweathermap.org/img/w/' . $weather['weather'][0]['icon'] . '.png',
-//
-//        );
+
+            $rows[] = array(
+                'data' => array(
+                    array(
+                        'data' =>  date('j M'),
+                        'colspan' => 2,
+                        'class' => 'weather-date')
+                ),
+            );
+
+
 
 
 
         foreach($weatherPerDay as $date => $weather) {
-            $img = array(
-                '#type' => 'image_style',
-                'path' => 'http://openweathermap.org/img/w/' . $weather['weather'][0]['icon'] . '.png',
 
+            $dayMonth = date('j M', $date);
+            $time = date('H i', $date);
+
+
+            $iconBuild = [
+                '#theme' => 'image',
+                '#uri' => 'http://openweathermap.org/img/w/' . $weather['weather'][0]['icon'] . '.png',
+            ];
+
+
+            $icon = $this->render->render($iconBuild);
+
+            $rightCellBuild = array(
+                'temperature' => array(
+                    // We wrap the fieldnote content up in a div tag.
+                    '#type' => 'html_tag',
+                    '#tag' => 'span',
+                    // This text is auto-XSS escaped.  See docs for the html_tag element.
+                    '#value' => $weather['temp']['temp'] . '°C',
+                    // Let's give the note a nice sticky-note CSS appearance.
+                    '#attributes' => array(
+                        'class' => 'label label-warning',
+                    ),
+
+                ),
+                'description' => array(
+                    '#type' => 'html_tag',
+                    '#tag' => 'i',
+                    '#value' => $weather['weather'][0]['description'],
+                ),
+                'weather' => array(
+                    '#type' => 'html_tag',
+                    '#tag' => 'p',
+                    '#value' => $weather['wind']['speed'] . 'm/s</br> clouds: ' . $weather['clouds']['all'] . '%, ' . $weather['temp']['pressure'] . ' hpa',
+                    '#attributes' => array(
+                        'class' => 'weather',
+                    ),
+                ),
             );
-            $img = render($img);
 
+            $leftCellBuild = array(
+                'date' => array(
+                    '#markup' => $time,
+                ),
+                'icon' => array(
+                    '#markup' => $icon,
+
+                ),
+            );
+
+            $leftCell = $this->render->render($leftCellBuild);
+            $rightCell = $this->render->render($rightCellBuild);
+
+
+
+            if ($time == '00 00') {
+                $rows[] = array(
+                    'data' => array(
+                        array(
+                            'data' =>  $dayMonth,
+                            'colspan' => 2,
+                            'class' => 'weather-date'
+                        )
+                    ),
+                    'no_striping' => TRUE,
+                );
+            }
             $rows[] = array(
                 'data' => array(
-                    $date,
-                    $weather['temp']['temp'],
-                    $weather['temp']['pressure'],
-                    $weather['weather'][0]['description'],
-                    $weather['wind']['speed'],
-                    $img
+                    $leftCell,
+                    $rightCell
                 ),
+                'no_striping' => TRUE,
             );
         }
 
-//        $rows[] = array(
-//            'data' => array('a','s',$weather),
-//
+
+//        $headers = array(
+//            t('Date'),
+//            t('Temp'),
+//            t('Pressure'),
+//            t('Weather'),
+//            t('Wind'),
+//            t('Pic'),
 //        );
-        $headers = array();
-        $headers[] = t('Date');
-        $headers[] = t('Temp');
-        $headers[] = t('Pressure');
-        $headers[] = t('Weather');
-        $headers[] = t('Wind');
-        $headers[] = t('Pic');
+
 
         $table_id = 'lesson4';
 
@@ -110,11 +174,19 @@ class Lesson4Controller extends ControllerBase {
 
         return array(
             '#type' => 'table',
-            '#header' => $headers,
             '#rows' => $rows,
+            '#prefix' => '<div class="daily_list">',
+            '#suffix' => '</div>',
             '#attributes' => array(
             'id' => $table_id,
-        ));
+            ),
+            // ..And this is the CSS for the stickynote.
+            '#attached' => array(
+                'library' => array('lesson4/weather_table'),
+            ),
+
+
+        );
 
 
     }

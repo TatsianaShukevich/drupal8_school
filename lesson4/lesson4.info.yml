@@ -4,3 +4,9 @@ package: Drupal 8 school
 
 type: module
 core: 8.x
+
+libraries-override:
+  bartik/global-styling:
+    css:
+      component:
+        css/components/table.css: false

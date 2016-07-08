@@ -1,0 +1,40 @@
+/**
+ * @file
+ * CSS for Field Example.
+ */
+#lesson4 {
+    width: 100%;
+    margin-bottom: 20px;
+    max-width: 100%;
+    background-color: whitesmoke;
+    border-spacing: 0;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    display: table;
+    border-color: grey;
+}
+#lesson4 tr {
+    background: white;
+    border-top: 1px solid #ddd;
+}
+
+
+#lesson4 tr td,
+tr th {
+    padding: 4px 9px;
+    border-bottom: 1px solid #d1ced5;
+    text-align: left; /* LTR */
+}
+
+/*#lesson4 td {*/
+    /*padding: 8px;*/
+    /*line-height: 1.42857143;*/
+    /*vertical-align: top;*/
+    /*border-top: 1px solid #ddd;*/
+/*}*/
+
+.daily_list {
+    width: 50%;
+}
+
+

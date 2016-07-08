@@ -13,8 +13,8 @@ use Drupal\Core\Config;
  */
 class WeatherService {
 
-    const LESSON4_WEATHER_SERVICE_5DAYS = 'http://api.openweathermap.org/data/2.5/forecast/city?id=625144&APPID=9c9c7fc2cd7bcdd06a4b869983cd2aca';
-    const LESSON4_WEATHER_SERVICE_CURRENT = 'http://api.openweathermap.org/data/2.5/weather?id=625144&appid=9c9c7fc2cd7bcdd06a4b869983cd2aca';
+    const LESSON4_WEATHER_SERVICE_5DAYS = 'http://api.openweathermap.org/data/2.5/forecast/city?id=625144&units=metric&APPID=9c9c7fc2cd7bcdd06a4b869983cd2aca';
+    const LESSON4_WEATHER_SERVICE_CURRENT = 'http://api.openweathermap.org/data/2.5/weather?id=625144&units=metric&appid=9c9c7fc2cd7bcdd06a4b869983cd2aca';
 
 
     /**
@@ -118,13 +118,15 @@ class WeatherService {
         return $weather['city']['name'];
     }
 
+    
     public function getWeatherPerDay() {
         $weather = $this->config->get('lesson4.weather');
         $weatherPerDay = array();
         foreach ($weather['list'] as $weatherDay) {
-            $weatherPerDay[$weatherDay['dt_txt']] = array(
+            $weatherPerDay[$weatherDay['dt']] = array(
                 'temp' => $weatherDay['main'],
                 'weather' => $weatherDay['weather'],
+                'clouds' => $weatherDay['clouds'],
                 'wind' => $weatherDay['wind'],
                 'rain' => $weatherDay['rain'],
                 
