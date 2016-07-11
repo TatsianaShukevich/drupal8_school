@@ -1,21 +1,22 @@
 /**
  * @file
- * CSS for Field Example.
+ * CSS for Weather table.
  */
 #lesson4 {
     width: 100%;
     margin-bottom: 20px;
     max-width: 100%;
-    background-color: whitesmoke;
+
     border-spacing: 0;
     border-collapse: collapse;
     box-sizing: border-box;
     display: table;
-    border-color: grey;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
 }
 #lesson4 tr {
     background: white;
-    border-top: 1px solid #ddd;
 }
 
 
@@ -24,17 +25,61 @@ tr th {
     padding: 4px 9px;
     border-bottom: 1px solid #d1ced5;
     text-align: left; /* LTR */
+    vertical-align: top;
 }
 
-/*#lesson4 td {*/
-    /*padding: 8px;*/
-    /*line-height: 1.42857143;*/
-    /*vertical-align: top;*/
+/*#lesson4  tr td:first-child {*/
     /*border-top: 1px solid #ddd;*/
 /*}*/
 
-.daily_list {
-    width: 50%;
+#lesson4 img {
+    vertical-align: middle;
 }
 
+.weather-date {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.daily-list {
+    width: 65%;
+}
+.city-name {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #505050;
+}
+.temp-avg {
+    /*display: inline;*/
+    /*padding: .2em .6em .3em;*/
+    /*font-size: 75%;*/
+    /*font-weight: bold;*/
+    /*line-height: 1;*/
+    /*color: #fff;*/
+    /*text-align: center;*/
+    /*white-space: nowrap;*/
+    /*vertical-align: baseline;*/
+    /*border-radius: .25em;*/
+    /*background-color: #f0ad4e;*/
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #f0ad4e;
+    border-radius: 10px;
+}
 

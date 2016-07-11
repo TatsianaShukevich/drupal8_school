@@ -58,38 +58,31 @@ class Lesson4Controller extends ControllerBase {
      */
     public function showRenderApiExamplePage() {
 
-
-        drupal_set_message($this->weatherService->getCityName());
-
         $weatherPerDay = $this->weatherService->getWeatherPerDay();
 
+        //The formation of rows of a table.
         $rows = array();
 
 
-            $rows[] = array(
-                'data' => array(
-                    array(
-                        'data' =>  date('j M'),
-                        'colspan' => 2,
-                        'class' => 'weather-date')
-                ),
-            );
-
-
-
+        $rows[] = array(
+            'data' => array(
+                array(
+                    'data' =>  date('D j M Y'),
+                    'colspan' => 2,
+                    'class' => 'weather-date')
+            ),
+        );
 
 
         foreach($weatherPerDay as $date => $weather) {
 
-            $dayMonth = date('j M', $date);
+            $dayMonth = date('D j M Y', $date);
             $time = date('H i', $date);
-
 
             $iconBuild = [
                 '#theme' => 'image',
                 '#uri' => 'http://openweathermap.org/img/w/' . $weather['weather'][0]['icon'] . '.png',
             ];
-
 
             $icon = $this->render->render($iconBuild);
 
@@ -102,7 +95,7 @@ class Lesson4Controller extends ControllerBase {
                     '#value' => $weather['temp']['temp'] . '°C',
                     // Let's give the note a nice sticky-note CSS appearance.
                     '#attributes' => array(
-                        'class' => 'label label-warning',
+                        'class' => 'temp-avg',
                     ),
 
                 ),
@@ -135,7 +128,7 @@ class Lesson4Controller extends ControllerBase {
             $rightCell = $this->render->render($rightCellBuild);
 
 
-
+            //weather for next day
             if ($time == '00 00') {
                 $rows[] = array(
                     'data' => array(
@@ -148,6 +141,7 @@ class Lesson4Controller extends ControllerBase {
                     'no_striping' => TRUE,
                 );
             }
+
             $rows[] = array(
                 'data' => array(
                     $leftCell,
@@ -158,35 +152,35 @@ class Lesson4Controller extends ControllerBase {
         }
 
 
-//        $headers = array(
-//            t('Date'),
-//            t('Temp'),
-//            t('Pressure'),
-//            t('Weather'),
-//            t('Wind'),
-//            t('Pic'),
-//        );
-
-
         $table_id = 'lesson4';
 
 
 
         return array(
-            '#type' => 'table',
-            '#rows' => $rows,
-            '#prefix' => '<div class="daily_list">',
-            '#suffix' => '</div>',
-            '#attributes' => array(
-            'id' => $table_id,
+            'city' => array(
+                '#type' => 'html_tag',
+                '#tag' => 'h3',
+                '#value' => $this->weatherService->getCityName(),
+                '#attributes' => array(
+                    'class' => 'city-name',
+                ),
             ),
-            // ..And this is the CSS for the stickynote.
-            '#attached' => array(
-                'library' => array('lesson4/weather_table'),
-            ),
+            'daily_list' => array(
+                '#type' => 'table',
+                '#rows' => $rows,
+                '#prefix' => '<div class="daily-list">',
+                '#suffix' => '</div>',
+                '#attributes' => array(
+                    'id' => $table_id,
+                ),
+                // ..And this is the CSS for the stickynote.
+                '#attached' => array(
+                    'library' => array('lesson4/weather_table'),
+                ),
 
-
+            )
         );
+
 
 
     }
