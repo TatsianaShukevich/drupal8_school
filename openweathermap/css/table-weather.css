@@ -2,7 +2,9 @@
  * @file
  * CSS for Weather table.
  */
-#lesson4 {
+#weather_table {
+    display: table;
+
     width: 100%;
     margin-bottom: 20px;
     max-width: 100%;
@@ -10,29 +12,24 @@
     border-spacing: 0;
     border-collapse: collapse;
     box-sizing: border-box;
-    display: table;
 
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
-#lesson4 tr {
+#weather_table tr {
     background: white;
 }
 
-
-#lesson4 tr td,
+#weather_table tr td,
 tr th {
     padding: 4px 9px;
     border-bottom: 1px solid #d1ced5;
-    text-align: left; /* LTR */
+
+    text-align: left;
     vertical-align: top;
 }
 
-/*#lesson4  tr td:first-child {*/
-    /*border-top: 1px solid #ddd;*/
-/*}*/
-
-#lesson4 img {
+#weather_table img {
     vertical-align: middle;
 }
 
@@ -49,36 +46,31 @@ tr th {
 }
 .city-name {
     display: block;
+
     font-family: 'Oswald', sans-serif;
     font-size: 36px;
+
     margin-top: 20px;
     margin-bottom: 10px;
+
     font-weight: 500;
     line-height: 1.1;
     color: #505050;
 }
 .temp-avg {
-    /*display: inline;*/
-    /*padding: .2em .6em .3em;*/
-    /*font-size: 75%;*/
-    /*font-weight: bold;*/
-    /*line-height: 1;*/
-    /*color: #fff;*/
-    /*text-align: center;*/
-    /*white-space: nowrap;*/
-    /*vertical-align: baseline;*/
-    /*border-radius: .25em;*/
-    /*background-color: #f0ad4e;*/
     display: inline-block;
     min-width: 10px;
     padding: 3px 7px;
+
     font-size: 12px;
     font-weight: bold;
     line-height: 1;
     color: #fff;
+
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
+
     background-color: #f0ad4e;
     border-radius: 10px;
 }

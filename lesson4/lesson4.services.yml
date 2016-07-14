@@ -1,3 +1,0 @@
-services:
-    lesson4.weather_service:
-        class: Drupal\lesson4\WeatherService

@@ -1,5 +1,0 @@
-weather_table:
-  version: 1.x
-  css:
-    theme:
-      css/table-weather.css: {}

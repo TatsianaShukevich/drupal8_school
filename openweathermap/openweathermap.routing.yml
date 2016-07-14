@@ -1,0 +1,12 @@
+openweathermap.weather_page:
+  path: '/weather'
+  defaults:
+    _controller: '\Drupal\openweathermap\Controller\WeatherController::showWeatherPage'
+  requirements:
+    _permission: 'view content'
+openweathermap.weather_map_page:
+  path: '/weather-map'
+  defaults:
+    _controller: '\Drupal\openweathermap\Controller\WeatherController::showWeatherMapPage'
+  requirements:
+    _permission: 'view content'

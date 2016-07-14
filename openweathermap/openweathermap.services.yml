@@ -1,0 +1,3 @@
+services:
+    openweathermap.weather_service:
+        class: Drupal\openweathermap\WeatherService

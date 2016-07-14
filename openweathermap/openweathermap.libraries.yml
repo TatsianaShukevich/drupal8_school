@@ -1,0 +1,40 @@
+weather_table:
+  version: 1.x
+  css:
+    theme:
+      css/table-weather.css: {}
+      css/block-weather.css: {}
+openlayers:
+  remote: http://openlayers.org/api/OpenLayers.js
+  version: 2.13.1
+  license:
+        name:  2-clause BSD License
+        url: http://openlayers.org/dev/license.txt
+  js:
+      http://openlayers.org/api/OpenLayers.js: { type: external, minified: true }
+openweathermap:
+  remote: http://openweathermap.org/js/OWM.OpenLayers.1.3.4.js
+  version: 1.3.4
+  license:
+        name:  2-clause BSD License
+        url: http://openweathermap.org
+  js:
+      http://openweathermap.org/js/OWM.OpenLayers.1.3.4.js: { type: external, minified: false }
+weather-map:
+  version: 1.x
+  css:
+    theme:
+      css/weather-map.css: {}
+  js:
+      js/weather-map.js: {}
+  dependencies:
+    - core/jquery
+weather-tile-map:
+  version: 1.x
+  css:
+    theme:
+      css/weather-map.css: {}
+  js:
+      js/weather-tile-map.js: {}
+  dependencies:
+    - core/jquery
