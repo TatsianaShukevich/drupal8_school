@@ -170,27 +170,16 @@ class WeatherController extends ControllerBase {
             );
         }
         else {
+            //Example for Response.
             $response = new Response(
                 'Content',
                 Response::HTTP_OK,
                 array('content-type' => 'text/html')
             );
             $response->setContent('The service currently unavailable. Please run cron');
-
-// the headers public attribute is a ResponseHeaderBag
             $response->headers->set('Content-Type', 'text/plain');
-
+            
             return $response->setStatusCode(Response::HTTP_NOT_FOUND);
-
-//            return array(
-//                '#markup' => $this->t('The service currently unavailable. Please run cron')
-//            );
         }
-    }
-
-    public function showWeatherMapPage() {
-        return array(
-            '#type' => 'weather_tile_map',
-        );
     }
 }

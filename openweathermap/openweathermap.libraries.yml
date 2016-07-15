@@ -20,7 +20,7 @@ openweathermap:
         url: http://openweathermap.org
   js:
       http://openweathermap.org/js/OWM.OpenLayers.1.3.4.js: { type: external, minified: false }
-weather-map:
+weather_map:
   version: 1.x
   css:
     theme:
@@ -29,7 +29,7 @@ weather-map:
       js/weather-map.js: {}
   dependencies:
     - core/jquery
-weather-tile-map:
+weather_tile_map:
   version: 1.x
   css:
     theme:

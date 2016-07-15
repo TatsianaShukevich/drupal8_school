@@ -1,5 +1,5 @@
 name: OpenWeatherMap Module
-description: A simple module provides a customized current weather report as a block and 5 day weather forecast as a page using OpenWeatherMap weather API.
+description: A simple module provides a customized current weather report and maps for Minsk as a block and 5 day weather forecast as a page using OpenWeatherMap weather API.
 package: Drupal 8 school
 
 type: module

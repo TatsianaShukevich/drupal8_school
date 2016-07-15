@@ -1,16 +1,18 @@
+/**
+ * @file
+ * Contains the definition of the behaviour weather tile map.
+ */
 jQuery(document).ready(function() {
-    //another map
-    //Center of map
-    //var lonlat = new OpenLayers.LonLat(27.566668, 53.900002);
-
+    "use strict";
+    //Center of map, Minsk
     var lat = 53.900002;
     var lon = 27.566668;
 
-//if  you use WGS 1984 coordinate you should  convert to mercator
-// 	lonlat.transform(
-// 		new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-// 		new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
-// 	);
+    //if  you use WGS 1984 coordinate you should  convert to mercator
+    // 	lonlat.transform(
+    // 		new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+    // 		new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
+    // 	);
 
     var lonlat = new OpenLayers.LonLat(lon, lat);
     lonlat.transform(
@@ -18,7 +20,14 @@ jQuery(document).ready(function() {
         new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
     );
 
-    var map = new OpenLayers.Map("tileMap");
+    //map size declares in element description
+    var width = drupalSettings.weather_tile_map.width;
+    var height = drupalSettings.weather_tile_map.height;
+
+    jQuery('#tileMap').width(width).height(height);
+
+    var map = new OpenLayers.Map('tileMap');
+
     // Create OSM overlays
     var mapnik = new OpenLayers.Layer.OSM();
 
@@ -32,7 +41,6 @@ jQuery(document).ready(function() {
         }
     );
 
-
     var layer_precipitation = new OpenLayers.Layer.XYZ(
         "precipitation",
         "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png",
@@ -43,9 +51,8 @@ jQuery(document).ready(function() {
         }
     );
 
-
+    //connect layers to map
     map.addLayers([mapnik, layer_precipitation, layer_cloud]);
-
 });
 
 

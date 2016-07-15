@@ -8,9 +8,7 @@ namespace Drupal\openweathermap\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\openweathermap\WeatherService;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Render\Renderer;
 
 /**
  * Provides a block with current weather data.
@@ -32,8 +30,6 @@ class WeatherMapBlock extends BlockBase implements ContainerFactoryPluginInterfa
      */
     public function __construct(array $configuration, $plugin_id, $plugin_definition) {
         parent::__construct($configuration, $plugin_id, $plugin_definition);
-
-
     }
 
     /**
@@ -53,6 +49,8 @@ class WeatherMapBlock extends BlockBase implements ContainerFactoryPluginInterfa
     public function build() {
         return array(
             '#type' => 'weather_map',
+            '#width' => '100%',
+            '#height' => '600px',
         );
     }
 }

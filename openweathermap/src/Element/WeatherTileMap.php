@@ -9,7 +9,9 @@ namespace Drupal\openweathermap\Element;
 use Drupal\Core\Render\Element\RenderElement;
 
 /**
- * Provides WeatherMap element.
+ * Provides WeatherTileMap element.
+ * 
+ *  Element can be used once on the same page.
  *
  * @RenderElement("weather_tile_map")
  */
@@ -21,6 +23,8 @@ class WeatherTileMap extends RenderElement {
         $class = get_class($this);
         return [
             '#theme' => 'weather_tile_map',
+            '#width' => '100%',
+            '#height' => '400px',
             '#pre_render' => [
                 [$class, 'preRenderWeatherTileMap'],
             ],
@@ -36,7 +40,13 @@ class WeatherTileMap extends RenderElement {
             'library' => [
                 'openweathermap/openlayers',
                 'openweathermap/openweathermap',
-                'openweathermap/weather-tile-map'
+                'openweathermap/weather_tile_map'
+            ],
+            'drupalSettings' => [
+                'weather_tile_map' => [
+                    'width' =>  $element['#width'],
+                    'height' => $element['#height'],
+                ],
             ],
         ];
 

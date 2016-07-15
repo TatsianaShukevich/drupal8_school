@@ -7,10 +7,11 @@
 namespace Drupal\openweathermap\Element;
 
 use Drupal\Core\Render\Element\RenderElement;
-use Drupal\Core\Url;
 
 /**
  * Provides WeatherMap element.
+ *
+ * Element can be used once on the same page.
  *
  * @RenderElement("weather_map")
  */
@@ -22,10 +23,12 @@ class WeatherMap extends RenderElement {
         $class = get_class($this);
         return [
             '#theme' => 'weather_map',
+            '#width' => '100%',
+            '#height' => '400px',
             '#pre_render' => [
                 [$class, 'preRenderWeatherMap'],
             ],
-        ];
+        ];      
     }
 
     /**
@@ -37,7 +40,13 @@ class WeatherMap extends RenderElement {
             'library' => [
                 'openweathermap/openlayers',
                 'openweathermap/openweathermap',
-                'openweathermap/weather-map'
+                'openweathermap/weather_map'
+            ],
+            'drupalSettings' => [
+                'weather_map' => [
+                    'width' =>  $element['#width'],
+                    'height' => $element['#height'],
+                ],
             ],
         ];
         

@@ -1,9 +1,8 @@
 <?php
 /**
  * @file
- * Contains implementing of hook_cron().
+ * Contains implementing some hooks.
  */
-
 
 /**
  * Implements hook_cron().

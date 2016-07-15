@@ -22,7 +22,6 @@ class WeatherService {
     const OPENWEATHERMAP_WEATHER_SERVICE_5DAYS = 'http://api.openweathermap.org/data/2.5/forecast/city';
     const OPENWEATHERMAP_WEATHER_SERVICE_CURRENT = 'http://api.openweathermap.org/data/2.5/weather';
 
-
     /**
      * Constructs a CurrenciesService object.
      */
